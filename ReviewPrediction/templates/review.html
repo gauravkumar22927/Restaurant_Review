@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Restaurant Feedback Form</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous" />
+    <link rel="stylesheet" type='text/css' href="{% static "review.css" %}" />
+  </head>
+  <body>
+    <div class="testbox">
+      <form action="" method="POST" role="form">
+        {% csrf_token %}
+        <h1>Restaurant Feedback Form</h1>
+        <p>Please help us improve our restaurant services by filling in our feedback form. Thank you!</p>
+        <a href="{% url 'logout' %}" class="topcorner text-white"> <i class="glyphicon glyphicon-plus-sign"></i>Logout </a>
+        <h4>Restaurant Name</h4>
+        <div class="name">{{form.name}}</div>
+        <h4>Review</h4>
+        <table>
+          <tr>
+            <td class="first-col">Food Quality</td>
+            <td>{{form.food}}</td>
+          </tr>
+          <tr>
+            <td class="first-col">Speed of Service</td>
+            <td>{{form.speed}}</td>
+          </tr>
+          <tr>
+            <td class="first-col">Price</td>
+            <td>{{form.price}}</td>
+          </tr>
+        </table>
+        <h4>Any comments, questions or suggestions?</h4>
+        {{form.text}}
+        <div class="btn-block">
+          <button type="submit" href="/">Send Feedback</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

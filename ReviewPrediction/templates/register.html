@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>OurApp</title>
+    <link href="https://fonts.googleapis.com/css?family=Public+Sans:300,400,400i,700,700i&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type='text/css' href="{% static "main.css" %}" />
+  </head>
+  <body>
+    <header class="header-bar bg-primary mb-3">
+      <div class="container d-flex flex-column flex-md-row align-items-center p-3">
+        <h4 class="my-0 mr-md-auto font-weight-normal">
+          <a href="/" class="text-white"> Restaurant Review Classification </a>
+        </h4>
+        <a href="{% url 'login' %}" class="text-white"> <i class="glyphicon glyphicon-plus-sign"></i>Sign in </a>
+      </div>
+    </header>
+
+    <div class="container py-md-2">
+      <div class="row align-items-center">
+        <div class="col-lg-7 py-3 py-md-5">
+          <!-- text-muted-->
+          <p class="lead">Are you sick of short tweets and impersonal &ldquo;shared&rdquo; posts that are reminiscent of the late 90&rsquo;s email forwards? We believe getting back to actually writing is the key to enjoying the internet again.</p>
+        </div>
+        <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5">
+          <form action="" method="POST" role="form">
+            {% csrf_token %} {% for field in form %}
+            <div>
+              {% for error in field.errors %}
+              <span class="errorlist" style="color: red"> {{error}} </span>
+              {% endfor %}
+            </div>
+            {% endfor %}
+            <div class="form-group">
+              <label for="username-register" class="text-muted mb-1">
+                <small>Username</small>
+              </label>
+              {{ form.username }}
+            </div>
+            <div class="form-group">
+              <label for="email-register" class="text-muted mb-1">
+                <small>Email</small>
+              </label>
+              {{ form.email }}
+            </div>
+            <div class="form-group">
+              <label for="password-register" class="text-muted mb-1">
+                <small>Password</small>
+              </label>
+              {{form.password1}}
+            </div>
+            <div class="form-group">
+              <label for="password-register" class="text-muted mb-1">
+                <small>Confirm Password</small>
+              </label>
+              {{form.password2}}
+            </div>
+            <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Sign up for ComplexApp</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <footer class="border-top text-center small text-muted py-3">
+      <p><a href="/" class="mx-1">Home</a> | <a class="mx-1" href="/about-us">About Us</a> | <a class="mx-1" href="/terms">Terms</a></p>
+      <p class="m-0">Copyright &copy; 2022 <a href="/" class="text-muted">ReviewApp</a>. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>OurApp</title>
+    <link href="https://fonts.googleapis.com/css?family=Public+Sans:300,400,400i,700,700i&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type='text/css' href="{% static "main2.css" %}" />
+  </head>
+  <body>
+    <header class="header-bar bg-primary mb-3">
+      <div class="container d-flex flex-column flex-md-row align-items-center p-3">
+        <h4 class="my-0 mr-md-auto font-weight-normal">
+          <a href="/" class="text-white"> Restaurant Review Classification </a>
+        </h4>
+        <form class="mb-0 pt-2 pt-md-0" actiom="" method="POST" role="form">
+          {% csrf_token %}
+          <div class="row align-items-center">
+            <div class="col-md mr-0 pr-md-0 mb-3 mb-md-0">{{form.username}}</div>
+            <div class="col-md mr-0 pr-md-0 mb-3 mb-md-0">{{form.password}}</div>
+            <div class="col-md-auto">
+              <button class="btn btn-success btn-sm">Sign In</button>
+            </div>
+            <a href="{% url 'register_page' %}" class="text-white"> <i class="glyphicon glyphicon-plus-sign"></i>Register </a>
+          </div>
+        </form>
+      </div>
+    </header>
+
+    <div class="container py-md-5">
+      <img src="{% static 'images/img1.jpg' %}" alt="Snow" style="width: 100%; height: 350px" />
+    </div>
+
+    <footer class="border-top text-center small text-muted py-3">
+      <p><a href="/" class="mx-1">Home</a> | <a class="mx-1" href="/about-us">About Us</a> | <a class="mx-1" href="/terms">Terms</a></p>
+      <p class="m-0">Copyright &copy; 2022 <a href="/" class="text-muted">ReviewApp</a>. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
