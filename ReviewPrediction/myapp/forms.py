@@ -40,11 +40,11 @@ class ReviewForm(ModelForm):
 
   def __init__(self,*args,**kwargs):
     super().__init__(*args,**kwargs)
-    self.fields['name'].widget.attrs.update({"type":"text", "name":"name", "placeholder":"Enter Name","tabindex":1})
-    self.fields['food'].widget.attrs.update({"value":"none", "name":"food","tabindex":2})
-    self.fields['speed'].widget.attrs.update({"value":"none", "name":"speed","tabindex":3})
-    self.fields['price'].widget.attrs.update({"value":"none","name":"price","tabindex":4})
-    self.fields['text'].widget.attrs.update({"rows":"5","tabindex":5})
+    self.fields['name'].widget.attrs.update({"type":"text","id":"name", "name":"name", "placeholder":"Enter Name","tabindex":1})
+    self.fields['food'].widget.attrs.update({"value":"none","id":"food", "name":"food","tabindex":2})
+    self.fields['speed'].widget.attrs.update({"value":"none","id":"speed", "name":"speed","tabindex":3})
+    self.fields['price'].widget.attrs.update({"value":"none","id":"price","name":"price","tabindex":4})
+    self.fields['text'].widget.attrs.update({"id":"text","rows":"5","tabindex":5})
     
   def save(self,commit = True):
     review = super().save(commit = False)

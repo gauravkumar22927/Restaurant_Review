@@ -4,16 +4,50 @@
   <head>
     <title>Restaurant Feedback Form</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous" />
     <link rel="stylesheet" type='text/css' href="{% static "review.css" %}" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
   <body>
+    <!-- Required popup view -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Prediction Results</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h5>Prediction Input:</h5>
+            <div>Sepal Length: <span id="sl"></span></div>
+            <div>Sepal Width: <span id="sw"></span></div>
+            <div>Petal Length: <span id="pl"></span></div>
+            <div>Petal width: <span id="pw"></span></div>
+            <div>Text: <span id="tx"></span></div>
+            <h5 class="pt-3">Prediction Classification:</h5>
+            <div id="prediction"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="testbox">
-      <form action="" method="POST" role="form">
+      <form id="post-form" action="" method="POST" role="form">
         {% csrf_token %}
+        <a href="{% url 'myapp:logout' %}" style="float: right" class="text-black"> <i class="glyphicon glyphicon-plus-sign"></i>Logout </a>
         <h1>Restaurant Feedback Form</h1>
         <p>Please help us improve our restaurant services by filling in our feedback form. Thank you!</p>
-        <a href="{% url 'logout' %}" class="topcorner text-white"> <i class="glyphicon glyphicon-plus-sign"></i>Logout </a>
         <h4>Restaurant Name</h4>
         <div class="name">{{form.name}}</div>
         <h4>Review</h4>
@@ -34,9 +68,39 @@
         <h4>Any comments, questions or suggestions?</h4>
         {{form.text}}
         <div class="btn-block">
-          <button type="submit" href="/">Send Feedback</button>
+          <button data-toggle="modal" data-target="#exampleModal" type="submit" href="/">Send Feedback</button>
         </div>
       </form>
     </div>
+    <script>
+      $(document).on("submit", "#post-form", function (e) {
+        e.preventDefault()
+        $.ajax({
+          type: "POST",
+          url: '{% url "myapp:submit_prediction" %}',
+          data: {
+            name: $("#name").val(),
+            food: $("#food").val(),
+            speed: $("#speed").val(),
+            price: $("#price").val(),
+            text: $("#text").val(),
+            csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
+            action: "post",
+          },
+          success: function (json) {
+            document.forms["post-form"].reset()
+            document.getElementById("prediction").innerHTML = json["result"] // result
+            document.getElementById("sl").innerHTML = json["name"]
+            document.getElementById("sw").innerHTML = json["food"]
+            document.getElementById("pl").innerHTML = json["speed"]
+            document.getElementById("pw").innerHTML = json["price"]
+            document.getElementById("tx").innerHTML = json["text"]
+          },
+          error: function (xhr, errmsg, err) {},
+        })
+      })
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
 </html>

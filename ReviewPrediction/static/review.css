@@ -15,11 +15,7 @@ select {
   color: #666;
   line-height: 22px;
 }
-.topcorner {
-  position: relative;
-  top: 50px;
-  right: 50px;
-}
+
 h1 {
   margin: 4px 0 4px;
   font-weight: 800;
