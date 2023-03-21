@@ -50,19 +50,18 @@ def predict_chances(request,*args,**kwargs):
         if form.is_valid():
           form.save()
         ## Receive data from client
-        #sepal_length = float(request.POST.get('sepal_length'))
-        #sepal_width = float(request.POST.get('sepal_width'))
-        #petal_length = float(request.POST.get('petal_length'))
-        #petal_width = float(request.POST.get('petal_width'))
+        #food = float(request.POST.get('food'))
+        #speed = float(request.POST.get('speed'))
+        #price = float(request.POST.get('price'))
+        #text = float(request.POST.get('text'))
 
         ## Unpickle model
-        #model = pd.read_pickle(r"C:\Users\azander\Downloads\new_model.pickle")
+        #model = pd.read_pickle(r"C:\Users\gaurav\OneDrive\Desktop\new_model.pickle")
         ## Make prediction
-        #result = model.predict([[sepal_length, sepal_width, petal_length, petal_width]])
+        #result = model.predict([[text]])
 
         #classification = result[0]
 
-        #PredResults.objects.create(sepal_length=sepal_length, sepal_width=sepal_width, petal_length=petal_length,petal_width=petal_width, classification=classification)
+        #PredResults.objects.create(food=food, speed=speed, price=price,text=text, classification=classification)
 
-        return JsonResponse({'result': "Positive", 'name': "dbaf",'food': "dfs", 'speed':"fdsg", 'price':"fsdg",'text':"restaurant was good"},
-                            safe=False)
+        return JsonResponse({'result': "Positive", 'name': name,'food': food, 'speed':speed, 'price':price,'text': text},safe=False)
