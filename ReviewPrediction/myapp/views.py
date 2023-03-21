@@ -58,10 +58,10 @@ def predict_chances(request,*args,**kwargs):
         ## Unpickle model
         #model = pd.read_pickle(r"C:\Users\gaurav\OneDrive\Desktop\new_model.pickle")
         ## Make prediction
-        #result = model.predict([[text]])
+        #result = model.predict([[form.cleaned_data.get("text")]])
 
         #classification = result[0]
 
         #PredResults.objects.create(food=food, speed=speed, price=price,text=text, classification=classification)
 
-        return JsonResponse({'result': "Positive", 'name': name,'food': food, 'speed':speed, 'price':price,'text': text},safe=False)
+        return JsonResponse({'result': "Positive", 'name': form.cleaned_data.get("name"),'food': form.cleaned_data.get("food"), 'speed':form.cleaned_data.get("speed"), 'price':form.cleaned_data.get("price"),'text': form.cleaned_data.get("text")},safe=False)
