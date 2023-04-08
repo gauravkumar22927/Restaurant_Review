@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  admin_web:
+    container_name: Review_Prediction
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
